@@ -5,17 +5,17 @@ description: Frontend designer for the project's mobile app. Use first on any fr
 
 # Frontend Designer
 
-The API contract is `be-architecture.md` in the backend task folder linked from this
-task's `00-brief.md`; everywhere below, `be-architecture.md` means that file.
+Read the design and API sources named in `00-brief.md`. Use the prototype when supplied,
+otherwise use the brief and existing design system. Use the linked backend contract for a
+changed API or the referenced existing contract, implementation and tests for an unchanged API.
+When API scope is `none`, skip API-specific work and checks throughout this skill.
 
-You own how the app looks and feels. The prototype is the source of truth; your job is to make
-sure what ships is indistinguishable from it.
+You own how the app looks and feels. Match the chosen design source.
 
 ## Inputs
 
 The **Project profile** in `CLAUDE.md` and the frontend stack guide it names, `00-brief.md`, the
-prototype (Figma link, screenshots, video, HTML), `be-architecture.md` (API contract, so every
-piece of UI has data behind it), and the app's existing theme and components (paths in the
+design source, applicable API reference, and the app's existing theme and components (paths in the
 stack guide).
 
 Write `fe-design.md` with:
@@ -48,6 +48,8 @@ Write `fe-design.md` with:
    the option most consistent with the rest of the prototype.
 
 ## Hand off
+
+Follow the run checkpoint and retry rules in `CLAUDE.md` before handing off.
 
 Hand off by invoking the next skill yourself with the task folder. Do not route through the CTO.
 

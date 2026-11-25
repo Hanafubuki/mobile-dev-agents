@@ -15,6 +15,10 @@ only entry point for work, and you do exactly two things:
 
 You do not run the roles in between. The role skills hand off to each other directly.
 
+Follow the run checkpoint and retry rules in `CLAUDE.md`. On `/cto resume <task-folder>`,
+read `run.md`, verify the recorded commit and pending stage, and resume that stage once any
+blocker is resolved. Keep the attempt history and record the reason for resuming.
+
 ## The pipeline (you start it, the roles run it)
 
 Backend and frontend are **separate tasks**, and the backend always goes first so the APIs
@@ -61,7 +65,9 @@ prototype or was given directly):
 2. Create the task folder `docs/tasks/<YYYY-MM-DD>-<task-slug>/` and write `00-brief.md`:
    - goal and user stories
    - acceptance criteria as a numbered, checkable list
-   - design references (prototype screens, screenshots, links) if any
+   - design source: prototype references when supplied, otherwise the brief and the existing design system
+   - frontend API scope: `changed` (linked backend task), `existing` (contract or implementation
+     and tests), or `none` (local-only feature)
    - whether it needs backend, frontend or both (a task created in Step A has one side; say
      which, and link the task it depends on)
    - out of scope
@@ -84,19 +90,25 @@ prototype or was given directly):
 When `be-reviewer` or `fe-reviewer` hands a task back to you, you verify, you do not trust the
 reports:
 
+Check the reviewed source commit with a clean application tree. Reuse full-check evidence
+only when it covers the same source commit, environment and criteria. Rerun affected checks
+after code, dependencies, fixtures or acceptance criteria change. Record commands, exit
+codes, test names and artifact paths alongside the checked commit. Commit task reports
+separately from application changes so the evidence can point to the source commit.
+
 1. **It works perfectly.**
    - Run the full test suites, linters and type checks for the side you are accepting (the
      commands are in the profile).
    - **Backend task:** call every endpoint in the API contract against the running app
      (success, validation, auth and error cases) and confirm responses match
      `be-architecture.md` exactly.
-   - **Frontend task:** run the app against the real backend and walk through every flow in
-     the brief, including error, empty and loading states.
+   - **Frontend task:** walk through every applicable flow and state in the brief. Use the real
+     backend for API-dependent features. Exercise local-only features without requiring one.
 2. **It matches.**
    - **Frontend task:** take screenshots of every screen and state and compare them side by
      side with the prototype (or the task's requirements): layout, spacing, typography,
      colours, icons, copy, interactions. Store them under `docs/tasks/<task>/screenshots/`.
-   - **Backend task:** the behaviour matches the task's requirements and the prototype's data.
+   - **Backend task:** the behaviour matches the task requirements and any supplied prototype data.
 3. **Every acceptance criterion** in `00-brief.md` is ticked with evidence (test name, command
    output, screenshot path).
 
@@ -122,6 +134,7 @@ docs/tasks/<YYYY-MM-DD>-<slug>-backend/
   be-plan.md                      be-planner
   be-slice-<N>-dev.md / -test.md  be-developer / be-tester
   be-review.md                    be-reviewer
+  run.md                          current checkpoint and attempt history
   acceptance.md                   cto
 
 docs/tasks/<YYYY-MM-DD>-<slug>-frontend/
@@ -130,6 +143,7 @@ docs/tasks/<YYYY-MM-DD>-<slug>-frontend/
   fe-plan.md                      fe-planner
   fe-slice-<N>-dev.md / -test.md  fe-developer / fe-tester
   fe-review.md                    fe-reviewer
+  run.md                          current checkpoint and attempt history
   acceptance.md                   cto
   screenshots/
 ```
@@ -148,6 +162,6 @@ Reject a task that breaks these even if it works.
 - Independent features run in parallel (workers in separate worktrees, merged into the task
   branch as each finishes). Respect real dependencies, for example a feature that reads data
   another feature creates waits for it.
-- Heavy checks run **once per completed task**, not per slice: live API runs, screenshots
-  against the prototype, running against the real backend, full review rounds. Per slice the
+- Heavy checks run **once per verified source revision**, not per slice: live API runs, screenshots
+  against the design source and running against the real backend when applicable. Per slice the
   roles run only fast tests, lint and type checks.

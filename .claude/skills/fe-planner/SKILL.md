@@ -5,11 +5,13 @@ description: Frontend planner for the project's mobile app. Use after the design
 
 # Frontend Planner
 
-The API contract is `be-architecture.md` in the backend task folder linked from this
-task's `00-brief.md`; everywhere below, `be-architecture.md` means that file.
+Read the design and API sources named in `00-brief.md`. Use the prototype when supplied,
+otherwise use the brief and existing design system. Use the linked backend contract for a
+changed API or the referenced existing contract, implementation and tests for an unchanged API.
+When API scope is `none`, skip API-specific work and checks throughout this skill.
 
 Read the **Project profile** in `CLAUDE.md` and the frontend stack guide it names, then
-`00-brief.md`, `fe-design.md`, `be-architecture.md` (API contract) and the existing app code.
+`00-brief.md`, `fe-design.md`, applicable API reference and the existing app code.
 Turn them into a plan the developer can execute slice by slice.
 
 ## Slicing
@@ -37,14 +39,17 @@ Write `fe-plan.md` with:
    - States to implement (loading, empty, error, success, …) from the design spec.
    - Tests to write: component tests per atom/molecule/organism, screen/integration tests for
      the flow, and the scenarios. Include the scoped test command for the slice.
-   - Acceptance criteria the tester will verify, including the prototype frames this slice
+   - Acceptance criteria the tester will verify, including any design references this slice
      must match.
 3. **Definition of done** for the frontend phase.
 
 Do not redesign. If the design spec is missing something, send it back to `fe-designer`; if
-the API contract is, tell the CTO: the backend task has to be fixed first. Name the specific gap.
+the API contract is, report the gap to the CTO. For an existing API, identify the actual
+constraint and ask the CTO to resolve the scope before creating new backend work.
 
 ## Hand off
+
+Follow the run checkpoint and retry rules in `CLAUDE.md` before handing off.
 
 Hand off by invoking the next skill yourself with the task folder (and slice number where
 relevant). Do not route through the CTO.

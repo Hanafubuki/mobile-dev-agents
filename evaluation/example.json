@@ -1,0 +1,31 @@
+{
+  "experiment": {"model": "record the pinned model and version"},
+  "repository": "/absolute/path/to/laravel-expo-app",
+  "adapters": {
+    "single": ["/absolute/path/to/single-agent-adapter"],
+    "pipeline": ["/absolute/path/to/cto-pipeline-adapter"]
+  },
+  "cases": [
+    {
+      "id": "mobile-date-filter",
+      "base": "replace-with-commit-sha",
+      "ticket": "Keep the payroll dashboard date filter when navigating away and back, including when offline. Do not add a new API call.",
+      "acceptance": ["/absolute/path/to/checks/mobile-date-filter"],
+      "regression": ["/absolute/path/to/checks/mobile-regression"]
+    },
+    {
+      "id": "monthly-arrivals",
+      "base": "replace-with-commit-sha",
+      "ticket": "Add monthly staff arrivals by cost center. Count each employee once per month and cost center, including employees with overlapping contracts.",
+      "acceptance": ["/absolute/path/to/checks/monthly-arrivals"],
+      "regression": ["/absolute/path/to/checks/metrics-regression"]
+    },
+    {
+      "id": "staff-directory",
+      "base": "replace-with-commit-sha",
+      "ticket": "Build a mobile staff directory backed by a cursor-paginated staff endpoint. Show loading, empty and retry states.",
+      "acceptance": ["/absolute/path/to/checks/staff-directory"],
+      "regression": ["/absolute/path/to/checks/directory-regression"]
+    }
+  ]
+}

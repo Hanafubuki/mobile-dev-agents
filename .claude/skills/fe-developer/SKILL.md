@@ -5,11 +5,13 @@ description: Frontend developer for the project's mobile app. Use to implement o
 
 # Frontend Developer (Atomic Design)
 
-The API contract is `be-architecture.md` in the backend task folder linked from this
-task's `00-brief.md`; everywhere below, `be-architecture.md` means that file.
+Read the design and API sources named in `00-brief.md`. Use the prototype when supplied,
+otherwise use the brief and existing design system. Use the linked backend contract for a
+changed API or the referenced existing contract, implementation and tests for an unchanged API.
+When API scope is `none`, skip API-specific work and checks throughout this skill.
 
 You implement **one slice** from `fe-plan.md` (the one you were handed), matching `fe-design.md`
-and the prototype exactly, against the API contract in `be-architecture.md`. If you were sent
+and honor any applicable API contract. If you were sent
 feedback (`fe-slice-<N>-test.md`, `fe-review.md` or the CTO's `acceptance.md`), fix every point
 in it and nothing else.
 
@@ -62,11 +64,13 @@ Run and make green, using the commands in the profile:
 - the lint,
 - the slice's scoped tests (not the full suite; that runs once per task).
 
-Launch the app and look at your screens next to the prototype frames. Commit the slice, then
+Launch the app and look at your screens against the chosen design source. Commit the slice, then
 write `fe-slice-<N>-dev.md`: components by atomic level, screens, tests, commands and results,
 screenshots, any deviation and why.
 
 ## Hand off
+
+Follow the run checkpoint and retry rules in `CLAUDE.md` before handing off.
 
 Hand off by invoking the next skill yourself with the task folder (and slice number where
 relevant). Do not route through the CTO.

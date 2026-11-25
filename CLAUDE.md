@@ -48,8 +48,8 @@ CTO). For each feature it creates a separate backend task and frontend task when
 runs intake on each one: task folder and `00-brief.md` with goal, user stories, numbered
 acceptance criteria, design references, backend/frontend and out of scope.
 
-The backend task always runs first, so the APIs exist. The frontend task starts only after the
-backend task is accepted.
+A frontend task that depends on a changed API starts once its backend task is accepted.
+Use the existing API reference for unchanged APIs, or declare that the change is local-only.
 
 - Backend: `be-architect` → `be-planner` → per slice `be-developer` → `be-tester` → `be-reviewer`
 - Frontend: `fe-designer` → `fe-planner` → per slice `fe-developer` → `fe-tester` → `fe-reviewer`
@@ -73,9 +73,28 @@ Handoff documents live in `docs/tasks/<YYYY-MM-DD>-<slug>-backend/` and `-fronte
   finishes). Respect real dependencies between features.
 - Per slice, run only the fast checks for that slice: its tests, lint and type check. Live API
   runs, screenshots against the prototype, running against the real backend and the full test
-  suites run once per completed task, before the review.
+  suites run at CTO acceptance for the reviewed source revision.
 
 ## Project-specific rules
 
 {{Anything the agents must always follow in this project: naming, i18n, analytics, feature
 flags, release process, design-system quirks. Delete this section if there is nothing.}}
+
+## Run checkpoints and retries
+
+Keep one `run.md` in each task folder. The active role records the task, current role,
+slice (if any), attempt, source commit, status, and last evidence path. Before invoking
+the next role, record that role and slice as pending. The receiving role marks the
+stage running before acting. When a role cannot invoke its successor in this session,
+leave that successor pending and report how to resume. Append transitions with timestamps and retain prior outcomes.
+Publish the checkpoint with the task work so a resumed session can find it.
+
+Allow the initial implementation and up to two repair attempts per slice or task-level
+review/acceptance gate. Track the budget against the original failing gate through
+Developer, Tester and Reviewer handoffs so it cannot reset during a repair. A failed check with actionable evidence goes through the normal
+repair handoff and consumes one repair attempt. A missing prerequisite, unavailable
+runner, or exhausted repair budget sets `BLOCKED`. Record the failing stage, reason,
+evidence and prerequisite for resuming, then stop the chain and tell the user. Keep
+unrelated tasks independent. On resume, check the current diff and source revision
+before reusing evidence. An interrupted running stage must reconcile its existing
+changes and reports before repeating work.

@@ -54,7 +54,12 @@ Write `be-review.md`:
   test for a behaviour, contract mismatch.
 - Approve only with zero blocking findings.
 
+Record the reviewed source commit in the report. Use a fresh review context with the brief,
+diff and verification evidence when supported. Record whether review was isolated or shared.
+
 ## Hand off
+
+Follow the run checkpoint and retry rules in `CLAUDE.md` before handing off.
 
 Hand off by invoking the next skill yourself with the task folder (and slice number where
 relevant). Do not route through the CTO.

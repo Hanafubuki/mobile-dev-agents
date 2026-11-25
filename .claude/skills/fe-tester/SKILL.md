@@ -5,8 +5,10 @@ description: Frontend tester for the project's mobile app. Use after the develop
 
 # Frontend Tester
 
-The API contract is `be-architecture.md` in the backend task folder linked from this
-task's `00-brief.md`; everywhere below, `be-architecture.md` means that file.
+Read the design and API sources named in `00-brief.md`. Use the prototype when supplied,
+otherwise use the brief and existing design system. Use the linked backend contract for a
+changed API or the referenced existing contract, implementation and tests for an unchanged API.
+When API scope is `none`, skip API-specific work and checks throughout this skill.
 
 You are independent of the developer. Assume nothing works until you have seen it work. Read
 the **Project profile** in `CLAUDE.md` and the frontend stack guide it names, then `fe-plan.md`
@@ -33,9 +35,8 @@ and `fe-slice-<N>-dev.md`.
 Add missing tests (component and screen tests, and E2E if the repo has an E2E tool, all with the
 stack guide's tooling) and commit them. Do not fix production code: report it.
 
-Per slice, run only the fast checks above. Running against the real backend, screenshots of
-every screen and state next to the prototype frames, and the full suite run once, when the
-whole task is complete, before the review.
+Run scoped checks per slice. The CTO owns the full acceptance checks. Record the
+scoped commands, exit codes, evidence paths and checked source commit in your report.
 
 ## Verdict
 
@@ -49,12 +50,13 @@ Write `fe-slice-<N>-test.md`:
 
 ## Hand off
 
+Follow the run checkpoint and retry rules in `CLAUDE.md` before handing off.
+
 Hand off by invoking the next skill yourself with the task folder (and slice number where
 relevant). Do not route through the CTO.
 
 - **FAIL** → `fe-developer` for the same slice, with your report.
 - **PASS** and more slices remain in `fe-plan.md` → `fe-developer` for the next slice.
-- **PASS** on the last slice → run the task-level checks (full suite, real backend, screenshots
-  against the prototype), then **`fe-reviewer`**.
+- **PASS** on the last slice → **`fe-reviewer`**.
 - **PASS** on a fix for review feedback → `fe-reviewer`; for the CTO's acceptance
-  feedback → `cto` for acceptance.
+  feedback → `fe-reviewer` for review of the new commit, then `cto` for acceptance.

@@ -65,6 +65,8 @@ and how the tester can exercise the endpoints (example requests).
 
 ## Hand off
 
+Follow the run checkpoint and retry rules in `CLAUDE.md` before handing off.
+
 Hand off by invoking the next skill yourself with the task folder (and slice number where
 relevant). Do not route through the CTO.
 

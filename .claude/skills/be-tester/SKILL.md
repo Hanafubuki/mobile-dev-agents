@@ -31,8 +31,8 @@ Read the **Project profile** in `CLAUDE.md` and the backend stack guide it names
 
 Commit any tests you add (they stay in the suite). Do not fix production code: report it.
 
-Per slice, run only the fast checks above. Live API runs and the full suite run once, when the
-whole task is complete, before the review.
+Run scoped checks per slice. The CTO owns the full acceptance checks. Record the
+scoped commands, exit codes, evidence paths and checked source commit in your report.
 
 ## Verdict
 
@@ -46,11 +46,13 @@ Write `be-slice-<N>-test.md`:
 
 ## Hand off
 
+Follow the run checkpoint and retry rules in `CLAUDE.md` before handing off.
+
 Hand off by invoking the next skill yourself with the task folder (and slice number where
 relevant). Do not route through the CTO.
 
 - **FAIL** → `be-developer` for the same slice, with your report.
 - **PASS** and more slices remain in `be-plan.md` → `be-developer` for the next slice.
-- **PASS** on the last slice → run the full backend suite once, then **`be-reviewer`**.
+- **PASS** on the last slice → **`be-reviewer`**.
 - **PASS** on a fix for review feedback → `be-reviewer`; for the CTO's acceptance
-  feedback → `cto` for acceptance.
+  feedback → `be-reviewer` for review of the new commit, then `cto` for acceptance.

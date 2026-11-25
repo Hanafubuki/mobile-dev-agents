@@ -13,7 +13,7 @@ Before deciding anything, read:
 - the **Project profile** in `CLAUDE.md` and the **backend stack guide** it names
   (`.claude/stacks/backend/<stack>.md`), which maps the layers below to real folders and
   framework features;
-- the task folder's `00-brief.md` and the prototype;
+- the task folder's `00-brief.md` and any supplied prototype;
 - the existing backend code and tests.
 
 Fit the existing architecture; extend it rather than inventing a parallel one.
@@ -73,6 +73,8 @@ Write `be-architecture.md` in the task folder with:
   abstraction is not.
 
 ## Hand off
+
+Follow the run checkpoint and retry rules in `CLAUDE.md` before handing off.
 
 Hand off by invoking the next skill yourself with the task folder (and slice number where
 relevant). Do not route through the CTO.

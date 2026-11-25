@@ -5,8 +5,10 @@ description: Frontend code reviewer for the project's mobile app. Use after all 
 
 # Frontend Reviewer
 
-The API contract is `be-architecture.md` in the backend task folder linked from this
-task's `00-brief.md`; everywhere below, `be-architecture.md` means that file.
+Read the design and API sources named in `00-brief.md`. Use the prototype when supplied,
+otherwise use the brief and existing design system. Use the linked backend contract for a
+changed API or the referenced existing contract, implementation and tests for an unchanged API.
+When API scope is `none`, skip API-specific work and checks throughout this skill.
 
 Review the whole frontend change for the task (the diff against the base branch), with
 `fe-design.md`, `fe-plan.md`, the API contract and the slice reports as context. Read the
@@ -60,7 +62,12 @@ Write `fe-review.md`:
   mismatch, accessibility failure, missing test for a behaviour, contract mismatch.
 - Approve only with zero blocking findings.
 
+Record the reviewed source commit in the report. Use a fresh review context with the brief,
+diff and verification evidence when supported. Record whether review was isolated or shared.
+
 ## Hand off
+
+Follow the run checkpoint and retry rules in `CLAUDE.md` before handing off.
 
 Hand off by invoking the next skill yourself with the task folder (and slice number where
 relevant). Do not route through the CTO.

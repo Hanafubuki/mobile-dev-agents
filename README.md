@@ -87,11 +87,17 @@ and runs through the pipeline again.
 
 ### Acceptance
 
-When a reviewer approves, the CTO verifies instead of trusting the reports: it runs the full
-suites, calls every endpoint in the contract, runs the app against the real backend, screenshots
-every screen and state next to the prototype, and ticks every acceptance criterion with
-evidence. It writes `acceptance.md` with **ACCEPTED** or **REJECTED**. Accepting a backend task
-starts its frontend task.
+The CTO runs the full acceptance checks on the reviewed source commit. It checks the
+live API and real-backend integration where applicable, captures mobile screenshots
+against the design source, and links every criterion to evidence in `acceptance.md`.
+Accepting a backend task unblocks its dependent frontend task.
+
+Each task also records role transitions, attempts and source commits in `run.md`.
+Missing prerequisites and repeated failures produce a `BLOCKED` checkpoint.
+After resolving the blocker, use `/cto resume <task-folder>`.
+
+A frontend-only task can use an existing API reference or declare that it has no API
+work. A plain ticket uses its brief and the app's design system as the design source.
 
 ### Standards
 
@@ -107,7 +113,8 @@ A task that breaks these is rejected even if it works.
 
 Per slice, the roles run only fast checks: the slice's tests, lint and type check. The heavy
 checks (full suites, live API calls, the real backend, screenshots against the prototype) run
-once per completed task. Independent features can run in parallel in separate worktrees.
+at CTO acceptance for the reviewed source revision. Independent features can run in parallel
+in separate worktrees.
 
 ## Adopting it in a project
 
@@ -151,6 +158,11 @@ rows of the profile as `n/a`; frontend tasks then start at `fe-designer` straigh
   skills together.
 - **Expo projects**: enabling the Expo plugin for Claude Code in your mobile folder's
   `.claude/settings.json` gives the frontend roles Expo-specific help.
+
+## Evaluation
+
+Use the [evaluation harness](evaluation/README.md) to compare the CTO pipeline with a
+single coding agent on the same tickets and external acceptance checks.
 
 ## Origin
 
