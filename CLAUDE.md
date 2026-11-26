@@ -58,6 +58,9 @@ The role skills hand off to each other directly and do not route back through th
 task finishes, the CTO checks that it works perfectly and matches the prototype or requested
 task, and that is the end.
 
+Before accepting an API-dependent frontend task, the CTO invokes the cross-stack verifier.
+Its report identifies contract and integration failures and ties evidence to both source revisions.
+
 Handoff documents live in `docs/tasks/<YYYY-MM-DD>-<slug>-backend/` and `-frontend/`.
 
 ## Non-negotiables

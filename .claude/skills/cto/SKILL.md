@@ -85,7 +85,19 @@ prototype or was given directly):
    feature task when the current one is accepted, unless `tasks.md` marks the two as
    independent.
 
-## 2. Acceptance
+## 2. Cross-stack verification and acceptance
+
+When a frontend reviewer approves an API-dependent feature, the CTO invokes
+`cross-stack-verifier` before final acceptance. Reuse a passing report only for
+the reviewed frontend and backend revisions and matching environment. Use the
+report as evidence for the live mobile-to-backend flow.
+
+On `FAIL`, use the reported evidence to route the fix to the owner and charge
+the cross-stack gate's retry budget. A backend fix must pass backend review and
+acceptance again. Keep the existing frontend task pending, review any resulting
+frontend changes, and run the gate against the updated revision pair. Escalate
+contract ambiguity before editing either side. On `BLOCKED`, record and resume
+the pending verifier stage through the checkpoint protocol.
 
 When `be-reviewer` or `fe-reviewer` hands a task back to you, you verify, you do not trust the
 reports:
@@ -103,7 +115,8 @@ separately from application changes so the evidence can point to the source comm
      (success, validation, auth and error cases) and confirm responses match
      `be-architecture.md` exactly.
    - **Frontend task:** walk through every applicable flow and state in the brief. Use the real
-     backend for API-dependent features. Exercise local-only features without requiring one.
+     backend for API-dependent features, using the verifier evidence for covered criteria.
+     Exercise local-only features without requiring one.
 2. **It matches.**
    - **Frontend task:** take screenshots of every screen and state and compare them side by
      side with the prototype (or the task's requirements): layout, spacing, typography,
@@ -143,6 +156,7 @@ docs/tasks/<YYYY-MM-DD>-<slug>-frontend/
   fe-plan.md                      fe-planner
   fe-slice-<N>-dev.md / -test.md  fe-developer / fe-tester
   fe-review.md                    fe-reviewer
+  cross-stack-verification.md     cross-stack-verifier (API-dependent tasks)
   run.md                          current checkpoint and attempt history
   acceptance.md                   cto
   screenshots/

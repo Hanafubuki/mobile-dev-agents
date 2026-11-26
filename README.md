@@ -26,6 +26,7 @@ CLAUDE.md                         Project template: the Project profile every sk
     fe-developer/                 Frontend: implements one slice
     fe-tester/                    Frontend: verifies one slice independently
     fe-reviewer/                  Frontend: reviews the whole change
+    cross-stack-verifier/         API-dependent mobile flows against the real backend
   stacks/
     README.md                     How to add a stack guide
     backend/laravel.md            Laravel layout, idioms, tests, commands
@@ -86,6 +87,9 @@ go to the developer and return through the tester; a rejected acceptance goes to
 and runs through the pipeline again.
 
 ### Acceptance
+
+For API-dependent frontend tasks, the cross-stack verifier exercises the real mobile-to-API
+flow and reports failures to the CTO for routing.
 
 The CTO runs the full acceptance checks on the reviewed source commit. It checks the
 live API and real-backend integration where applicable, captures mobile screenshots

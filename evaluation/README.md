@@ -58,3 +58,24 @@ For regression, keep an existing case on the same path, such as default date
 filters, another staff metric, or preexisting directory behavior. The example
 tickets and adapter paths are templates for your target app. The self-test uses
 a small Git fixture and verifies the runner without making model calls.
+
+## Learn from a failed run
+
+Run the same benchmark before and after a versioned skill or workflow change.
+Keep the cases, model, check commands, source commits, and repetitions fixed. Use
+one failed check and its log to explain the change. The comparison pairs results
+by case, commit, mode, and attempt, then points to fixed, recurring, regressed,
+and inconclusive outcomes.
+
+```sh
+python3 evaluation/compare.py before/report.json after/report.json
+python3 evaluation/learning_demo.py /tmp/mobile-learning-demo
+```
+
+The deterministic demo reproduces a staff directory whose mobile client reads
+`items` while its backend returns `staff`. The workflow variant models the
+verifier's fix by correcting the client, then reruns the unchanged acceptance
+and regression checks. The unchanged single-agent variant is the control.
+This exercises the feedback and comparison loop with scripted adapters.
+Use real agent adapters and an independently authored Laravel/Expo suite to
+measure the impact of the skill itself.
