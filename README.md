@@ -173,3 +173,8 @@ single coding agent on the same tickets and external acceptance checks.
 These agents were extracted from a production React Native + Laravel app, where they built the
 app feature by feature from an HTML prototype, and then made generic so any mobile project can use
 them.
+
+## LangGraph runner
+
+The [LangGraph controller](orchestration/README.md) runs the existing role skills
+with SQLite checkpoints, explicit approval and resumable verification.
